@@ -43,8 +43,8 @@ return [
 
         'admin_panel' => [
             'driver' => 'session',
-            'provider' => 'admins'
-        ]
+            'provider' => 'admins',
+        ],
     ],
 
     /*
