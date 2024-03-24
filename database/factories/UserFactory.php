@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'name' => fake()->name(),
             'username' => fake()->userName(),
             'password' => static::$password ??= Hash::make('password'),
+            'picture' => fake()->imageUrl(),
         ];
     }
 }
