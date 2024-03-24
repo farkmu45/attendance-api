@@ -3,9 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
-use Filament\Forms;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
@@ -13,8 +11,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -59,7 +55,7 @@ class UserResource extends Resource
                             ->revealable()
                             ->columnSpanFull()
                             ->required()
-                            ->dehydrated(false)
+                            ->dehydrated(false),
                     ])->columns(),
             ]);
     }
@@ -75,7 +71,7 @@ class UserResource extends Resource
                 Tables\Columns\TextColumn::make('created_at')
                     ->since()
                     ->label('Created')
-                    ->sortable()
+                    ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
