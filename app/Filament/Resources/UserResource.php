@@ -32,6 +32,8 @@ class UserResource extends Resource
                             ->imageEditor()
                             ->imagePreviewHeight(300)
                             ->required()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png'])
+                            ->directory('pictures')
                             ->columnSpanFull(),
                         TextInput::make('name')
                             ->required()
