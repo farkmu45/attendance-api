@@ -47,6 +47,7 @@ class UserResource extends Resource
                             ->password()
                             ->revealable()
                             ->required()
+                            ->hiddenOn('edit')
                             ->columnSpanFull()
                             ->rule(Password::default())
                             ->dehydrateStateUsing(fn ($state) => Hash::make($state))
@@ -57,6 +58,7 @@ class UserResource extends Resource
                             ->revealable()
                             ->columnSpanFull()
                             ->required()
+                            ->hiddenOn('edit')
                             ->dehydrated(false),
                     ])->columns(),
             ]);

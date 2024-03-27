@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'start_time' => env('APP_MAX_TIME_IN', 8),
+    'end_time' => env('APP_MAX_TIME_OUT', 17),
 ];
