@@ -63,6 +63,8 @@ class AttendanceController extends Controller
 
             $response = json_decode($response->body(), true);
 
+            return $response;
+
             if (!$response['result']) {
                 return response()->json([
                     'error' => 'Face not recognized',
