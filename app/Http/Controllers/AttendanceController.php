@@ -11,7 +11,7 @@ class AttendanceController extends Controller
 {
     public function index()
     {
-        Attendance::all();
+        return Attendance::latest()->paginate(10);
     }
 
     public function store(Request $request)
