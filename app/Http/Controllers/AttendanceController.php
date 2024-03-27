@@ -63,7 +63,7 @@ class AttendanceController extends Controller
 
             $response = json_decode($response->body(), true);
 
-            return $response;
+            return [$response, $filePath,  asset('storage/' . auth()->user()->picture)];
 
             if (!$response['result']) {
                 return response()->json([
