@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\Auth\UserResource;
 use App\Http\Resources\Auth\UserTokenResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -29,6 +30,11 @@ class AuthController extends Controller
         }
 
         return new UserTokenResource($user);
+    }
+
+    public function me(): JsonResource
+    {
+        return new UserResource(auth()->user());
     }
 
     public function logout(Request $request): JsonResponse

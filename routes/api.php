@@ -11,6 +11,7 @@ Route::prefix('auth')->middleware('guest')->group(function () {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::resource('attendances', AttendanceController::class)
         ->except(['destroy', 'update']);
+    Route::get('me', [AuthController::class, 'me']);
 });
 
 Route::prefix('auth')->middleware('auth:sanctum')->group(function () {
