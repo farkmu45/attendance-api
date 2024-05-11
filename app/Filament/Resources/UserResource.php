@@ -8,6 +8,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -47,7 +48,7 @@ class UserResource extends Resource
                             ->password()
                             ->revealable()
                             ->required()
-                            ->hiddenOn('edit')
+                            ->required(fn(string $operation) => $operation == 'create')
                             ->columnSpanFull()
                             ->rule(Password::default())
                             ->dehydrateStateUsing(fn ($state) => Hash::make($state))
@@ -57,8 +58,7 @@ class UserResource extends Resource
                             ->password()
                             ->revealable()
                             ->columnSpanFull()
-                            ->required()
-                            ->hiddenOn('edit')
+                            ->required(fn(Get $get) => $get('password') != null)
                             ->dehydrated(false),
                     ])->columns(),
             ]);
