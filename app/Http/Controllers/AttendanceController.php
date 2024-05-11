@@ -40,10 +40,10 @@ class AttendanceController extends Controller
             $type = null;
         }
 
-        if (!$type) {
+        if (! $type) {
             return response()->json([
                 'error' => 'Not authorized',
-                'code' => 'ATTENDANCE_EXISTS'
+                'code' => 'ATTENDANCE_EXISTS',
             ], 403);
         }
 
@@ -54,19 +54,19 @@ class AttendanceController extends Controller
             ]);
 
             $filePath = $request->file('picture')->store('public/attendances');
-            $filePath = asset('storage/' . str_replace('public/', '', $filePath));
+            $filePath = asset('storage/'.str_replace('public/', '', $filePath));
 
             $response = Http::post('https://farkmu45-attendance-api.hf.space', [
                 'image' => $filePath,
-                'target_image' => asset('storage/' . auth()->user()->picture),
+                'target_image' => asset('storage/'.auth()->user()->picture),
             ]);
 
             $response = json_decode($response->body(), true);
 
-            if (!$response['result']) {
+            if (! $response['result']) {
                 return response()->json([
                     'error' => 'Face not recognized',
-                    'code' => 'NOT_RECOGNIZED'
+                    'code' => 'NOT_RECOGNIZED',
                 ], 403);
             }
         }
@@ -78,7 +78,7 @@ class AttendanceController extends Controller
 
         if (now() > $startTime && $type == 'IN') {
             $deviate = true;
-        } else if (now() < $endTime && $type == 'OUT') {
+        } elseif (now() < $endTime && $type == 'OUT') {
             $deviate = true;
         }
 
@@ -86,7 +86,7 @@ class AttendanceController extends Controller
             'type' => $type,
             'time' => now(),
             'is_deviate' => $deviate,
-            'user_id' => auth()->user()->id
+            'user_id' => auth()->user()->id,
         ];
 
         return Attendance::create($data);

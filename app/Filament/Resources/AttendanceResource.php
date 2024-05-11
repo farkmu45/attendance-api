@@ -3,19 +3,14 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\AttendanceResource\Pages;
-use App\Filament\Resources\AttendanceResource\RelationManagers;
 use App\Models\Attendance;
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class AttendanceResource extends Resource
 {
@@ -34,7 +29,6 @@ class AttendanceResource extends Resource
     {
         return false;
     }
-
 
     public static function table(Table $table): Table
     {
@@ -55,12 +49,12 @@ class AttendanceResource extends Resource
                     }),
                 IconColumn::make('is_deviate')
                     ->boolean()
-                    ->label('On time?')
+                    ->label('On time?'),
 
             ])
             ->filters([
                 SelectFilter::make('user')
-                    ->relationship('user', 'name')
+                    ->relationship('user', 'name'),
             ])
             ->actions([
                 Tables\Actions\DeleteAction::make(),

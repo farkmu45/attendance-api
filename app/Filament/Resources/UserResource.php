@@ -48,7 +48,7 @@ class UserResource extends Resource
                             ->password()
                             ->revealable()
                             ->required()
-                            ->required(fn(string $operation) => $operation == 'create')
+                            ->required(fn (string $operation) => $operation == 'create')
                             ->columnSpanFull()
                             ->rule(Password::default())
                             ->dehydrateStateUsing(fn ($state) => Hash::make($state))
@@ -58,7 +58,7 @@ class UserResource extends Resource
                             ->password()
                             ->revealable()
                             ->columnSpanFull()
-                            ->required(fn(Get $get) => $get('password') != null)
+                            ->required(fn (Get $get) => $get('password') != null)
                             ->dehydrated(false),
                     ])->columns(),
             ]);
