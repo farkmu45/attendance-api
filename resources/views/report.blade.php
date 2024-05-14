@@ -4,7 +4,8 @@
 
     <div class="mb-6">
       <div class="flex items-center">
-        <img class="mr-4 h-10 w-10 object-cover rounded-full" src="{{ asset($user->picture) }}" alt="User Picture">
+        <img class="mr-4 h-10 w-10 rounded-full object-cover" src="{{ asset('storage/' . $user->picture) }}"
+          alt="User Picture">
         <div>
           <h3 class="text-lg font-bold">{{ $user->name }}</h3>
           <p class="text-gray-500">{{ $user->username }}</p>
