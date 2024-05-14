@@ -4,8 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AttendanceResource\Pages;
 use App\Models\Attendance;
+use App\Models\User;
+use Filament\Forms\Components\Select;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
@@ -63,6 +66,24 @@ class AttendanceResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->headerActions([
+                Action::make('Create report')
+                    ->icon('heroicon-o-plus')
+                    ->form(
+                        [
+                            Select::make('userId')
+                                ->label('User name')
+                                ->options(
+                                    User::query()->pluck('name', 'id')
+                                )
+                                ->searchable()
+                                ->required()
+                        ]
+                    )
+                    ->action(function (array $data): void {
+                        redirect(route('report', $data['userId']));
+                    })
             ]);
     }
 

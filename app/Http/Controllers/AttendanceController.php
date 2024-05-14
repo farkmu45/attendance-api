@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
@@ -95,5 +96,15 @@ class AttendanceController extends Controller
     public function show(Attendance $attendance)
     {
         return $attendance;
+    }
+
+    public function report(User $user)
+    {
+        $attendances = Attendance::where('user_id', $user->id)
+            ->whereDate('time', '>=', now()->subMonth()->startOfMonth())
+            ->whereDate('time', '<', now()->startOfMonth())
+            ->get();
+
+        return view('report', compact('attendances', 'user'));
     }
 }
