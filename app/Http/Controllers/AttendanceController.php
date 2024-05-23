@@ -101,8 +101,8 @@ class AttendanceController extends Controller
     public function report(User $user)
     {
         $attendances = Attendance::where('user_id', $user->id)
-            ->whereDate('time', '>=', now()->subMonth()->startOfMonth())
-            ->whereDate('time', '<', now()->startOfMonth())
+            ->whereDate('time', '>=', now()->startOfMonth())
+            ->whereDate('time', '<', now()->endOfMonth())
             ->get();
 
         return view('report', compact('attendances', 'user'));
