@@ -43,16 +43,6 @@ class AttendanceResource extends Resource
                 TextColumn::make('time')
                     ->sortable()
                     ->dateTime(),
-                TextColumn::make('type')
-                    ->badge()
-                    ->formatStateUsing(fn ($state) => $state == 'IN' ? 'Entrance' : 'Exit')
-                    ->color(fn (string $state): string => match ($state) {
-                        'IN' => 'success',
-                        'OUT' => 'warning',
-                    }),
-                IconColumn::make('is_deviate')
-                    ->boolean()
-                    ->label('On time?'),
 
             ])
             ->filters([

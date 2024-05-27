@@ -21,30 +21,15 @@ class AttendanceController extends Controller
         $userId = auth()->user()->id;
         $type = null;
 
-        $attendanceIn = Attendance::where('user_id', $userId)
+        $attendanceExist = Attendance::where('user_id', $userId)
             ->where('type', 'IN')
             ->whereDate('time', now())
             ->first();
 
-        $attendanceOut = Attendance::where('user_id', $userId)
-            ->where('type', 'OUT')
-            ->whereDate('time', now())
-            ->first();
-
-        if ($attendanceIn) {
-            $type = 'OUT';
-        } else {
-            $type = 'IN';
-        }
-
-        if ($attendanceOut) {
-            $type = null;
-        }
-
-        if (! $type) {
+        if ($attendanceExist) {
             return response()->json([
                 'error' => 'Not authorized',
-                'code' => 'ATTENDANCE_EXISTS',
+                'code' => 'ATTENDANCE_EXIST',
             ], 403);
         }
 
@@ -72,21 +57,9 @@ class AttendanceController extends Controller
             }
         }
 
-        // Face recognition passed, check if the user attends on time
-        $deviate = false;
-        $startTime = Carbon::createFromTimeString(config('app.start_time'));
-        $endTime = Carbon::createFromTimeString(config('app.end_time'));
-
-        if (now() > $startTime && $type == 'IN') {
-            $deviate = true;
-        } elseif (now() < $endTime && $type == 'OUT') {
-            $deviate = true;
-        }
-
         $data = [
             'type' => $type,
             'time' => now(),
-            'is_deviate' => $deviate,
             'user_id' => auth()->user()->id,
         ];
 

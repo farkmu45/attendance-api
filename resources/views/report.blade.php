@@ -16,7 +16,6 @@
     <table class="w-full border-collapse">
       <thead>
         <tr>
-          <th class="border-b px-4 py-2">Type</th>
           <th class="border-b px-4 py-2">Date</th>
           <th class="border-b px-4 py-2">Time</th>
         </tr>
@@ -24,13 +23,6 @@
       <tbody>
         @foreach ($attendances as $attendance)
           <tr>
-            <td class="border-b px-4 py-2">
-              @if ($attendance->type === 'IN')
-                Entrance
-              @else
-                Exit
-              @endif
-            </td>
             <td class="border-b px-4 py-2 text-center">{{ $attendance->time->format('Y-m-d') }}</td>
             <td class="border-b px-4 py-2 text-center">{{ $attendance->time->format('H:i') }}</td>
           </tr>

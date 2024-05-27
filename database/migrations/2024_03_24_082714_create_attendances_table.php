@@ -19,8 +19,6 @@ return new class extends Migration
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
             $table->dateTime('time');
-            $table->enum('type', ['IN', 'OUT']);
-            $table->boolean('is_deviate')->default(false);
             $table->timestamps();
         });
     }
