@@ -22,7 +22,6 @@ class AttendanceController extends Controller
         $type = null;
 
         $attendanceExist = Attendance::where('user_id', $userId)
-            ->where('type', 'IN')
             ->whereDate('time', now())
             ->first();
 
